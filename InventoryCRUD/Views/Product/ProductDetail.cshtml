@@ -1,0 +1,26 @@
+﻿@model InventoryManagement.Models.Product
+
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+<h2>Product Detail</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditProduct", new { id = Model.Id }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Back to List", "ProductList")
+</p>

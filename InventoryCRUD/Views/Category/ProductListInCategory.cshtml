@@ -1,0 +1,49 @@
+﻿@model IEnumerable<InventoryManagement.Models.Product>
+
+@{
+    ViewBag.Title = "ProductListInCategory";
+}
+
+
+@section Styles{
+    <style type="text/css">
+        h2 {
+            text-align: center;
+        }
+
+        tr td, tr > th {
+            border: 1px solid black !important;
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgba(0, 0, 0,0.4);
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+}
+
+<h2>ProductList In @ViewBag.CategoryName Category</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "RemoveProductFromCategory", new { id = ViewBag.CategoryId, productId = item.Id }, new { @class = "btn btn-sm btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Back to Categories List", "CategoryList")

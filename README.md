@@ -1,2 +1,2 @@
 # NimapTasks
-all tasks from nimap
+all tasks from nimap task list

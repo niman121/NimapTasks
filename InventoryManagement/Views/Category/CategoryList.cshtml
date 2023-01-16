@@ -1,0 +1,88 @@
+﻿@model IEnumerable<InventoryManagement.Models.Category>
+
+@{
+    ViewBag.Title = "CategoryList";
+}
+
+@section Styles{
+    <style type="text/css">
+        h2 {
+            text-align: center;
+        }
+
+        .btn-warning {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-danger {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-info {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-success {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        tr td, tr > th {
+            border: 1px solid black !important;
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgba(0, 0, 0,0.4);
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+}
+
+
+<h2>Category List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCategory")
+</p>
+@using (Html.BeginForm("CategoryList", "Category", FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Actions </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        @Html.ActionLink("Product list", "ProductListInCategory", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })<span>&nbsp;</span>
+                        @Html.ActionLink("Add Products", "ProductListToAddInCategory", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
+                        <span>&nbsp;</span>
+                        @Html.ActionLink("Deactivate", "DeActivateCategory", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Activate", "ActivateCategory", new { id = item.Id }, new { @class = "btn btn-sm btn-success" })
+                    }
+                    &nbsp;
+                    @Html.ActionLink("Edit", "EditCategory", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" })
+                    @Html.ActionLink("Details", "CategoryDetail", new { id = item.Id }, new { @class = "btn btn-sm btn-info" })
+                    @Html.ActionLink("Delete", "DeleteCategory", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    int totalPage = ViewBag.TotalNumberOfPages;
+    for (int i = 1; i <= totalPage; i++)
+    {
+        @Html.ActionLink($"{i}", "CategoryList", new { pageNumber = i }) <span>&nbsp;</span>
+    }
+}

@@ -1,0 +1,59 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<InventoryManagement.ViewModels.ProductWithCategoryListViewModel>
+
+@{
+    ViewBag.Title = "ProductCategoryList";
+}
+
+
+@section Styles{
+    <style type="text/css">
+        h2 {
+            text-align: center;
+        }
+
+        tr td, tr > th {
+            border: 1px solid black !important;
+        }
+
+        tr:nth-child(odd) {
+            background-color: rgba(0, 0, 0,0.4);
+            color: rgba(255,255,255,0.8);
+        }
+    </style>
+}
+
+<h2>Product Category List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.categoryName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var categoryname = String.Join(" | ", item.categoryName);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => categoryname)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br/>
+<h3>
+    @ViewBag.Result
+</h3>
+<h3>
+    @ViewBag.Action
+</h3>
